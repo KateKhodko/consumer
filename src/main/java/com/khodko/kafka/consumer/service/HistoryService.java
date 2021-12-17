@@ -24,17 +24,9 @@ public class HistoryService {
         this.template = template;
     }
 
-    @KafkaListener(topics = "request", groupId = "server.broadcast")
-    public void listenGroup(HttpServletRequest httpServletRequest) {
-        log.info("=> consumed {}", httpServletRequest.toString());
+    @KafkaListener(topics = "request", groupId = "request")
+    public void listenGroup(String message) {
+        log.info(message);
     }
 
-    public String addFile(MultipartFile upload) throws IOException {
-        DBObject metadata = new BasicDBObject();
-        metadata.put("fileSize", upload.getSize());
-
-        ObjectId fileID = template.store(upload.getInputStream(), upload.getOriginalFilename(), upload.getContentType(), metadata);
-
-        return fileID.toString();
-    }
 }

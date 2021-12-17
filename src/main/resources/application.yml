@@ -14,7 +14,7 @@ spring:
       max-request-size: 215MB
       location: /home/kate/upload
 server:
-  port: 9092
+  port: 8097
 kafka:
   consumer: localhost:9092
   group:
